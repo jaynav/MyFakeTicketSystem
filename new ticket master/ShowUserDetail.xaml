@@ -1,0 +1,108 @@
+﻿<Window x:Class="new_ticket_master.ShowUserDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dataEntity="clr-namespace:new_ticket_master"
+        Title="ShowUserDetail" Height="442" Width="676" Loaded="Window_Loaded">
+    <Window.Resources>
+       <!-- <dataEntity:ShowUserDetail x:Key="keyinstance"/>-->
+       
+    </Window.Resources>
+        <Grid Width="652">
+     
+        <Menu Height="23" HorizontalAlignment="Stretch" Name="menu1" VerticalAlignment="Top">
+            <MenuItem Header="Add">
+                <MenuItem Header="Add Payment"  Click="AddPayment_Click"/>
+                <MenuItem Header="Add Event" Click="AddEventInfo_Click" />
+                <MenuItem Header="Add CreditCard" Click="AddCCInfo_Click" />
+            </MenuItem>
+            <MenuItem Header="Edit" IsEnabled="False">
+                <MenuItem Header="Edit Payment"  />
+                <MenuItem Header="Edit Event"  />
+                <MenuItem Header="Edit CreditCard" />
+            </MenuItem>
+            <MenuItem Header="Delete">
+                <MenuItem Header="Delete Payment" Click="btnDelete_Click_1"/>
+                <MenuItem Header="Delete Event"  Click="btnDelete_Click"/>
+                <MenuItem Header="Delete CreditCard" Click="btnDelete_Click_2" />
+            </MenuItem>
+            <MenuItem Header="Print Data">
+                <MenuItem Header="Print to Printer" Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
+
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" Name="uId" Text="NaN" VerticalAlignment="Top" Visibility="Hidden" />
+        
+         <DataGrid AutoGenerateColumns="False" Height="137" HorizontalAlignment="Left" Margin="308,29,0,0"
+                  Name="dataGrid1" VerticalAlignment="Top" Width="312" ColumnWidth="*"
+                  RowEditEnding="dataGrid1_RowEditEnding" CellEditEnding="dataGrid1_CellEditEnding"
+                  SelectionChanged="dataGrid1_SelectionChanged" BorderBrush="{x:Null}" HorizontalGridLinesBrush="{x:Null}" VerticalGridLinesBrush="{x:Null}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="EventId" Binding="{Binding Path=EventId,Mode=TwoWay}" 
+                                   x:Name="dgrEventID" />
+                <DataGridTextColumn Header="EventName" Binding="{Binding Path=EventName, Mode=TwoWay}"
+                                    x:Name="dgrEventName"/>
+                <DataGridTextColumn Header="EventCost" Binding="{Binding Path=EventCost,Mode=TwoWay}"
+                                     x:Name="dgrEventCost"/>
+                <!--
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Update" x:Name="btnUpdate" Click="btnUpdate_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+               
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" x:Name="btnDelete" Click="btnDelete_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                -->
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" Height="137" HorizontalAlignment="Left" Margin="12,29,0,0"
+                  Name="dataGrid2" VerticalAlignment="Top" Width="283" ColumnWidth="*"
+                  RowEditEnding="dataGrid2_RowEditEnding" CellEditEnding="dataGrid2_CellEditEnding"
+                  SelectionChanged="dataGrid2_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ticket Number" Binding="{Binding Path=TicketNumber, Mode=TwoWay}"
+                                    x:Name="dgrTicketNumber"/>
+                <DataGridTextColumn Header="Payment Method" Binding="{Binding Path=PaymentMethod, Mode=TwoWay}"
+                                    x:Name="dgrPaymentMethod"/>
+                <DataGridTextColumn Header="Purchase Date" Binding="{Binding Path=PurchaseDate, Mode=TwoWay}"
+                                    x:Name="dgrPurchaseDate"/>
+                
+                <!--
+                    <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" x:Name="btnDelete" Click="btnDelete_Click_1"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                    -->
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" Height="165" HorizontalAlignment="Left" Margin="23,207,0,0"
+                  Name="dataGrid3" VerticalAlignment="Top" Width="608" ColumnWidth="*"
+                  RowEditEnding="dataGrid3_RowEditEnding" CellEditEnding="dataGrid3_CellEditEnding"
+                  SelectionChanged="dataGrid3_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Account Number" Binding="{Binding Path=AccountNumber,Mode=TwoWay}"
+                                    x:Name="dgrAccountNumber"/>
+                <DataGridTextColumn Header="Expriration Date" Binding="{Binding Path=ExpirationDate,Mode=TwoWay}"
+                                    x:Name="dgrExpirationDate"/>
+                <DataGridTextColumn Header="Security Key" Binding="{Binding Path=SecurityKey, Mode=TwoWay}"
+                                    x:Name="dgrSecurityKey" />
+                <DataGridTextColumn Header="City" Binding="{Binding Path=City, Mode=TwoWay}"
+                                    x:Name="dgrCity" />
+                <DataGridTextColumn Header="State" Binding="{Binding Path=State, Mode=TwoWay}"
+                                    x:Name="dgrState" />
+                <DataGridTextColumn Header="Zip Code" Binding="{Binding Path=ZipCode, Mode=TwoWay}"
+                                    x:Name="dgrZipCode" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

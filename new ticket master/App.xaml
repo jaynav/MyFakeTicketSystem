@@ -1,0 +1,31 @@
+﻿<Application x:Class="new_ticket_master.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:DataBinder="clr-namespace:new_ticket_master"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataBinder:PaymentValidator x:Key="checkData"/>
+            <DataBinder:EventValidator x:Key="checkEvent" />
+            <DataBinder:CreditValidator x:Key="checkCreditCard"/>
+            <DataBinder:UserValidator x:Key="checkUser" />
+            
+            <DataTemplate x:Key="ListBoxTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="First Name: " Width="70"/>
+                    <TextBlock Text="{Binding Path=FirstName}" Width="65"/>
+                    <TextBlock Text="Last Name: " Width="70"/>
+                    <TextBlock Text="{Binding Path=LastName}" Width="65" />
+                    <TextBlock Text="ID: " Width="15"/>
+                    <TextBlock Text="{Binding Path=UserID}" Width="20"/>
+                </StackPanel>
+            </DataTemplate>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ErrorStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

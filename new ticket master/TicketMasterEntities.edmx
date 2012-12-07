@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TicketMastersModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TicketMastersModelStoreContainer">
+          <EntitySet Name="CreditCardInfoes" EntityType="TicketMastersModel.Store.CreditCardInfoes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Events" EntityType="TicketMastersModel.Store.Events" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PaymentInfoes" EntityType="TicketMastersModel.Store.PaymentInfoes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="TicketMastersModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CreditCardInfo_User" Association="TicketMastersModel.Store.FK_CreditCardInfo_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CreditCardInfoes" EntitySet="CreditCardInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_User" Association="TicketMastersModel.Store.FK_Event_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentInfo_User" Association="TicketMastersModel.Store.FK_PaymentInfo_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PaymentInfoes" EntitySet="PaymentInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CreditCardInfoes">
+          <Key>
+            <PropertyRef Name="AccountNumber" />
+          </Key>
+          <Property Name="CardAccountNumber" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="SecurityKey" Type="nchar" MaxLength="3" />
+          <Property Name="UserFirstName" Type="nchar" MaxLength="20" />
+          <Property Name="UserLastName" Type="nchar" MaxLength="20" />
+          <Property Name="City" Type="nchar" MaxLength="10" />
+          <Property Name="State" Type="nchar" MaxLength="10" />
+          <Property Name="ZipCode" Type="nchar" MaxLength="10" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="AccountNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="nchar" MaxLength="10" />
+          <Property Name="EventCost" Type="decimal" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentInfoes">
+          <Key>
+            <PropertyRef Name="TicketNumber" />
+          </Key>
+          <Property Name="TicketNumber" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMethod" Type="nchar" MaxLength="10" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="LastName" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="StreetAddress" Type="nchar" MaxLength="30" />
+          <Property Name="City" Type="nchar" MaxLength="24" />
+          <Property Name="State" Type="nchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nchar" MaxLength="5" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_CreditCardInfo_User">
+          <End Role="Users" Type="TicketMastersModel.Store.Users" Multiplicity="0..1" />
+          <End Role="CreditCardInfoes" Type="TicketMastersModel.Store.CreditCardInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CreditCardInfoes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_User">
+          <End Role="Users" Type="TicketMastersModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Events" Type="TicketMastersModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInfo_User">
+          <End Role="Users" Type="TicketMastersModel.Store.Users" Multiplicity="0..1" />
+          <End Role="PaymentInfoes" Type="TicketMastersModel.Store.PaymentInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PaymentInfoes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TicketMastersModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TicketMastersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CreditCardInfoes" EntityType="TicketMastersModel.CreditCardInfo" />
+          <EntitySet Name="Events" EntityType="TicketMastersModel.Event" />
+          <EntitySet Name="PaymentInfoes" EntityType="TicketMastersModel.PaymentInfo" />
+          <EntitySet Name="Users" EntityType="TicketMastersModel.User" />
+          <AssociationSet Name="FK_CreditCardInfo_User" Association="TicketMastersModel.FK_CreditCardInfo_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CreditCardInfoes" EntitySet="CreditCardInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_User" Association="TicketMastersModel.FK_Event_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentInfo_User" Association="TicketMastersModel.FK_PaymentInfo_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PaymentInfoes" EntitySet="PaymentInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CreditCardInfo">
+          <Key>
+            <PropertyRef Name="AccountNumber" />
+          </Key>
+          <Property Name="CardAccountNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpirationDate" Type="DateTime" />
+          <Property Name="SecurityKey" Type="String" MaxLength="3" Unicode="true" FixedLength="true" />
+          <Property Name="UserFirstName" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="UserLastName" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="City" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="State" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TicketMastersModel.FK_CreditCardInfo_User" FromRole="CreditCardInfoes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="EventCost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TicketMastersModel.FK_Event_User" FromRole="Events" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PaymentInfo">
+          <Key>
+            <PropertyRef Name="TicketNumber" />
+          </Key>
+          <Property Name="TicketNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="PurchaseDate" Type="DateTime" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TicketMastersModel.FK_PaymentInfo_User" FromRole="PaymentInfoes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+          <Property Name="StreetAddress" Type="String" MaxLength="30" Unicode="true" FixedLength="true" />
+          <Property Name="City" Type="String" MaxLength="24" Unicode="true" FixedLength="true" />
+          <Property Name="State" Type="String" MaxLength="2" Unicode="true" FixedLength="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" Unicode="true" FixedLength="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="CreditCardInfoes" Relationship="TicketMastersModel.FK_CreditCardInfo_User" FromRole="Users" ToRole="CreditCardInfoes" />
+          <NavigationProperty Name="Events" Relationship="TicketMastersModel.FK_Event_User" FromRole="Users" ToRole="Events" />
+          <NavigationProperty Name="PaymentInfoes" Relationship="TicketMastersModel.FK_PaymentInfo_User" FromRole="Users" ToRole="PaymentInfoes" />
+        </EntityType>
+        <Association Name="FK_CreditCardInfo_User">
+          <End Role="Users" Type="TicketMastersModel.User" Multiplicity="0..1" />
+          <End Role="CreditCardInfoes" Type="TicketMastersModel.CreditCardInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CreditCardInfoes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_User">
+          <End Role="Users" Type="TicketMastersModel.User" Multiplicity="0..1" />
+          <End Role="Events" Type="TicketMastersModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInfo_User">
+          <End Role="Users" Type="TicketMastersModel.User" Multiplicity="0..1" />
+          <End Role="PaymentInfoes" Type="TicketMastersModel.PaymentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PaymentInfoes">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TicketMastersModelStoreContainer" CdmEntityContainer="TicketMastersEntities">
+          <EntitySetMapping Name="CreditCardInfoes">
+            <EntityTypeMapping TypeName="TicketMastersModel.CreditCardInfo">
+              <MappingFragment StoreEntitySet="CreditCardInfoes">
+                <ScalarProperty Name="CardAccountNumber" ColumnName="CardAccountNumber" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="SecurityKey" ColumnName="SecurityKey" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TicketMastersModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventCost" ColumnName="EventCost" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentInfoes">
+            <EntityTypeMapping TypeName="TicketMastersModel.PaymentInfo">
+              <MappingFragment StoreEntitySet="PaymentInfoes">
+                <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TicketMastersModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TicketMasterEntities">
+        <EntityTypeShape EntityType="TicketMastersModel.CreditCardInfo" Width="1.5" PointX="3" PointY="1.25" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="TicketMastersModel.Event" Width="1.5" PointX="3" PointY="5.125" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="TicketMastersModel.PaymentInfo" Width="1.5" PointX="3" PointY="7.875" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="TicketMastersModel.User" Width="1.5" PointX="0.75" PointY="4" Height="3.1340950520833335" IsExpanded="true" />
+        <AssociationConnector Association="TicketMastersModel.FK_CreditCardInfo_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.1920475260416667" />
+          <ConnectorPoint PointX="3" PointY="4.1920475260416667" />
+        </AssociationConnector>
+        <AssociationConnector Association="TicketMastersModel.FK_Event_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.1151432291666667" />
+          <ConnectorPoint PointX="3" PointY="6.1151432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="TicketMastersModel.FK_PaymentInfo_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="7.1340950520833335" />
+          <ConnectorPoint PointX="1.5" PointY="8.8651432291666659" />
+          <ConnectorPoint PointX="3" PointY="8.8651432291666659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

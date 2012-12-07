@@ -1,0 +1,35 @@
+﻿<Window x:Class="new_ticket_master.EventInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       
+        Title="EventInfo" Height="232" Width="300">
+    
+    <!--<Window.Resources>
+        <EventValidator:EventValidator x:Key="checkData" />
+    </Window.Resources>-->
+    <Grid>
+        <Label Content="Event Name" Height="28" HorizontalAlignment="Left" Margin="12,45,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="Event Cost" Height="28" HorizontalAlignment="Left" Margin="12,78,0,0" Name="label3" VerticalAlignment="Top" />
+
+        
+        <TextBox Style="{StaticResource errorGandumStyle}" Height="23" HorizontalAlignment="Left" Margin="146,45,0,0" Name="EName" VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Source="{StaticResource checkEvent}" Path ="EventNameer" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Style="{StaticResource errorGandumStyle}" Height="23" HorizontalAlignment="Left" Margin="146,78,0,0" Name="ECost" VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Source="{StaticResource checkEvent}" Path ="EventCoster" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button Content="oK" Height="23" HorizontalAlignment="Left" Margin="96,154,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+       </Grid>
+</Window>
